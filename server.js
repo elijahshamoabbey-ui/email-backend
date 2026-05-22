@@ -11,8 +11,8 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "gamelyspin@gmail.com",
-    pass: "YOUR_APP_PASSWORD"
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -49,6 +49,8 @@ app.post("/send-email", async (req, res) => {
 });
 
 // Start server
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
